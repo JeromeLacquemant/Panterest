@@ -12,9 +12,6 @@ class PinsController extends AbstractController
      */
     public function index()
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/PinsController.php',
-        ]);
+        return $this->render('pins/index.html.twig');
     }
 }
