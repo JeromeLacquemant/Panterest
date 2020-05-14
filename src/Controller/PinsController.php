@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Pin;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PinsController extends AbstractController
 {
@@ -12,6 +13,10 @@ class PinsController extends AbstractController
      */
     public function index()
     {
+        $pin = new Pin;
+
+        dd($pin);
+
         return $this->render('pins/index.html.twig');
     }
 }
