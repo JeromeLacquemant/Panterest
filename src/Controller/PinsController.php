@@ -9,25 +9,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PinsController extends AbstractController
 {
-    private $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
-    
+   
     /**
      * @Route("/pins", name="pins")
      */
-    public function index()
+    public function index(EntityManagerInterface $em)
     {
         $pin = new Pin;
-        $pin->setTitle('Title 2');
-        $pin->setDescription('Description 2');
+        $pin->setTitle('Title 3');
+        $pin->setDescription('Description 3');
 
-        $this->em->persist($pin);
+        $em->persist($pin);
 
-        $this->em->flush();
+        $em->flush();
 
         return $this->render('pins/index.html.twig');
     }
