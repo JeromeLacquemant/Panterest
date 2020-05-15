@@ -34,9 +34,8 @@ class PinsController extends AbstractController
         $pin = new Pin;
 
         $form = $this->createFormBuilder($pin)
-                ->add('title', TextType::class)
-                ->add('description', TextareaType::class)
-                ->add('submit', SubmitType::class, ['label' => 'Create Pin'])
+                ->add('title', null)
+                ->add('description', null)
                 ->getForm()
         ;
 
