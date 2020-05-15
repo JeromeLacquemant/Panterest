@@ -14,7 +14,7 @@ class PinsController extends AbstractController
 {
    
     /**
-     * @Route("/", name="app_home")
+     * @Route("/", name="app_home", methods={"GET"})
      */
     public function index(PinRepository $repo) : Response
     {
@@ -26,22 +26,10 @@ class PinsController extends AbstractController
     /**
      * @Route("/pins/create", name="app_pins_create", methods={"GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $em)
+    public function create(Request $request, EntityManagerInterface $em) : Response
     {
-        if ($request->isMethod('POST')) {
-            $data = $request->request->all();
-
-            if($this->isCsrfTokenValid('pins_create', $data['_token'])) {
-                $pin = new Pin;
-                $pin->setTitle($data['title']);
-                $pin->setDescription($data['description']);
-                $em->persist($pin);
-                $em->flush();
-            }
-             
-            return $this->redirectToRoute('app_home');
-        }
-
+        $this->createFormBuilder();
+        
         return $this->render('pins/create.html.twig');
     }
 }
