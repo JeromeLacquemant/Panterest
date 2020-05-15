@@ -31,7 +31,9 @@ class PinsController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $em) : Response
     {
-        $form = $this->createFormBuilder()
+        $pin = new Pin;
+
+        $form = $this->createFormBuilder($pin)
                 ->add('title', TextType::class)
                 ->add('description', TextareaType::class)
                 ->add('submit', SubmitType::class, ['label' => 'Create Pin'])
@@ -41,11 +43,6 @@ class PinsController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $pin = New Pin;
-            $pin->setTitle($data['title']);
-            $pin->setDescription($data['description']);
             $em->persist($pin);
             $em->flush();
 
